@@ -3,11 +3,26 @@ const taskInput = document.getElementById("taskInput");
 const taskBtn = document.getElementById("taskBtn");
 const taskList = document.getElementById("taskList");
 
+//   show/hide text
+const hiddenText=document.getElementById("hiddenText");
+
+const upDateHiddenMessage=()=>{
+if(taskList.children.length===0){
+    hiddenText.style.display="block"
+}
+else{
+hiddenText.style.display="none"
+}
+
+}
+  upDateHiddenMessage();
+
 todoForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const task = taskInput.value.trim();
   if (task === "") {
     alert("Enter a task");
+  
     return;
   }
 
@@ -38,6 +53,8 @@ todoForm.addEventListener("submit", (e) => {
     taskInput.value = span.textContent;
     li.remove();
   });
+
+
   // DeleteButton
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "Delete";
@@ -45,6 +62,7 @@ todoForm.addEventListener("submit", (e) => {
 
   deleteBtn.addEventListener("click", () => {
     li.remove();
+      upDateHiddenMessage();
   });
 
   btnGroup.appendChild(doneBtn);
@@ -55,6 +73,8 @@ todoForm.addEventListener("submit", (e) => {
   li.appendChild(btnGroup);
 
   taskList.appendChild(li);
+   upDateHiddenMessage();
+   
 
   taskInput.value = "";
 });
